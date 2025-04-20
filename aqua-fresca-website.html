@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aqua Fresca - Pure Spring Water</title>
+    <style>
+      /* Reset CSS */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* Global Styles */
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+
+      .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      a {
+        text-decoration: none;
+        color: #0070c0;
+      }
+
+      img {
+        max-width: 100%;
+      }
+
+      section {
+        padding: 60px 0;
+      }
+
+      .btn {
+        display: inline-block;
+        background: #0070c0;
+        color: white;
+        padding: 12px 25px;
+        border-radius: 5px;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+      }
+
+      .btn:hover {
+        background: #00559b;
+        transform: translateY(-2px);
+      }
+
+      h2 {
+        font-size: 2.5rem;
+        margin-bottom: 30px;
+        color: #0070c0;
+        text-align: center;
+        position: relative;
+      }
+
+      h2:after {
+        content: "";
+        display: block;
+        width: 80px;
+        height: 3px;
+        background: #0070c0;
+        margin: 15px auto 0;
+      }
+
+      /* Header Styles */
+      header {
+        background-color: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        width: 100%;
+        z-index: 100;
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+      }
+
+      .logo img {
+        width: 160px;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+      }
+
+      .nav-links li {
+        margin-left: 40px;
+      }
+
+      .nav-links a {
+        color: #333;
+        font-weight: 600;
+        transition: color 0.3s ease;
+      }
+
+      .nav-links a:hover {
+        color: #0070c0;
+      }
+
+      .mobile-menu {
+        display: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
+      /* Hero Section */
+      .hero {
+        background: linear-gradient(
+            rgba(0, 112, 192, 0.8),
+            rgba(0, 112, 192, 0.8)
+          ),
+          url("/api/placeholder/1200/600") no-repeat center center/cover;
+        height: 100vh;
+        color: white;
+        display: flex;
+        align-items: center;
+        text-align: center;
+      }
+
+      .hero-content {
+        padding-top: 70px;
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+        margin-bottom: 20px;
+        line-height: 1.2;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+        max-width: 700px;
+        margin: 0 auto 30px;
+      }
+
+      /* About Section */
+      .about {
+        background-color: white;
+      }
+
+      .about-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 40px;
+      }
+
+      .about-text {
+        flex: 1;
+      }
+
+      .about-image {
+        flex: 1;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Products Section */
+      .products {
+        background-color: #f0f8ff;
+      }
+
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+      }
+
+      .product-card {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .product-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .product-image {
+        height: 250px;
+        background-color: #e6f2ff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .product-image img {
+        max-height: 200px;
+      }
+
+      .product-info {
+        padding: 20px;
+        text-align: center;
+      }
+
+      .product-info h3 {
+        margin-bottom: 10px;
+        color: #0070c0;
+      }
+
+      .product-info p {
+        color: #666;
+        margin-bottom: 15px;
+      }
+
+      /* Process Section */
+      .process {
+        background-color: white;
+      }
+
+      .process-steps {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 40px;
+        flex-wrap: wrap;
+      }
+
+      .process-step {
+        flex: 1;
+        min-width: 250px;
+        text-align: center;
+        padding: 0 20px;
+        margin-bottom: 30px;
+      }
+
+      .step-icon {
+        width: 100px;
+        height: 100px;
+        background: #e6f2ff;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto 20px;
+        font-size: 2.5rem;
+        color: #0070c0;
+      }
+
+      .process-step h3 {
+        margin-bottom: 15px;
+        color: #0070c0;
+      }
+
+      /* Testimonials Section */
+      .testimonials {
+        background-color: #f0f8ff;
+      }
+
+      .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+      }
+
+      .testimonial-card {
+        background: white;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .testimonial-text {
+        font-style: italic;
+        margin-bottom: 20px;
+        position: relative;
+      }
+
+      .testimonial-text:before {
+        content: '"';
+        font-size: 4rem;
+        position: absolute;
+        left: -15px;
+        top: -20px;
+        color: #0070c0;
+        opacity: 0.2;
+      }
+
+      .testimonial-author {
+        display: flex;
+        align-items: center;
+      }
+
+      .author-image {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 15px;
+      }
+
+      .author-info h4 {
+        color: #0070c0;
+        margin-bottom: 5px;
+      }
+
+      /* Contact Section */
+      .contact {
+        background-color: white;
+      }
+
+      .contact-content {
+        display: flex;
+        justify-content: space-between;
+        gap: 40px;
+        margin-top: 40px;
+      }
+
+      .contact-info {
+        flex: 1;
+      }
+
+      .contact-info h3 {
+        color: #0070c0;
+        margin-bottom: 20px;
+      }
+
+      .contact-method {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 20px;
+      }
+
+      .contact-icon {
+        margin-right: 15px;
+        font-size: 1.2rem;
+        color: #0070c0;
+      }
+
+      .contact-form {
+        flex: 1;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-family: inherit;
+      }
+
+      .form-group textarea {
+        height: 150px;
+        resize: vertical;
+      }
+
+      /* Footer */
+      footer {
+        background-color: #1a1a1a;
+        color: white;
+        padding: 60px 0 20px;
+      }
+
+      .footer-content {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 40px;
+        flex-wrap: wrap;
+      }
+
+      .footer-column {
+        flex: 1;
+        min-width: 250px;
+        margin-bottom: 30px;
+      }
+
+      .footer-column h3 {
+        margin-bottom: 20px;
+        color: #0070c0;
+      }
+
+      .footer-column ul {
+        list-style: none;
+      }
+
+      .footer-column li {
+        margin-bottom: 10px;
+      }
+
+      .footer-column a {
+        color: #ddd;
+        transition: color 0.3s ease;
+      }
+
+      .footer-column a:hover {
+        color: #0070c0;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 15px;
+      }
+
+      .social-links a {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        background: #333;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.3s ease;
+      }
+
+      .social-links a:hover {
+        background: #0070c0;
+        transform: translateY(-3px);
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: 20px;
+        border-top: 1px solid #333;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 991px) {
+        .about-content {
+          flex-direction: column;
+        }
+
+        .contact-content {
+          flex-direction: column;
+        }
+
+        h2 {
+          font-size: 2rem;
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+
+        .mobile-menu {
+          display: block;
+        }
+
+        .hero h1 {
+          font-size: 2rem;
+        }
+
+        .process-steps {
+          flex-direction: column;
+        }
+
+        .process-step {
+          margin-bottom: 40px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="container">
+        <nav>
+          <div class="logo">
+            <img src="image/logo.jpeg" alt="Aqua Fresca Logo" />
+          </div>
+          <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#products">Products</a></li>
+            <li><a href="#process">Our Process</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+          <div class="mobile-menu">☰</div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="hero-content">
+          <h1>Pure Spring Water from Nature's Source</h1>
+          <p>
+            Aqua Fresca brings you the purest spring water from the pristine
+            mountains of Timor-Leste, bottled with care to preserve its natural
+            minerals and refreshing taste.
+          </p>
+          <a href="#products" class="btn">Explore Our Products</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+      <div class="container">
+        <h2>About Aqua Fresca</h2>
+        <div class="about-content">
+          <div class="about-text">
+            <p>
+              Founded in 2018, Aqua Fresca is dedicated to providing the highest
+              quality spring water to the people of Timor-Leste and beyond. Our
+              water is sourced from natural springs deep within the mountains,
+              where it is naturally filtered through layers of rock, enriching
+              it with essential minerals.
+            </p>
+            <p>
+              At Aqua Fresca, we believe in sustainable practices and giving
+              back to our community. We use eco-friendly packaging and support
+              local environmental conservation efforts to ensure that our
+              natural resources are preserved for generations to come.
+            </p>
+            <p>
+              Our commitment to quality is unwavering. Every bottle of Aqua
+              Fresca undergoes rigorous testing to ensure it meets the highest
+              standards of purity and taste. We take pride in delivering water
+              that is not only refreshing but also beneficial for your health.
+            </p>
+          </div>
+          <div class="about-image">
+            <img src="image/fresca.jpg" alt="Aqua Fresca Spring Source" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+      <div class="container">
+        <h2>Our Products</h2>
+        <div class="product-grid">
+          <div class="product-card">
+            <div class="product-image">
+              <img src="image/image1.png" alt="500ml Bottle" />
+            </div>
+            <div class="product-info">
+              <h3>500ml Bottle</h3>
+              <p>
+                Perfect for on-the-go hydration. Our convenient 500ml bottle
+                fits in most cup holders and bags.
+              </p>
+              <a href="#contact" class="btn">Learn More</a>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">
+              <img src="image/image2.png" alt="1.5L Bottle" />
+            </div>
+            <div class="product-info">
+              <h3>1.5L Bottle</h3>
+              <p>
+                Ideal for family use or all-day hydration. Our 1.5L bottle
+                provides ample refreshment.
+              </p>
+              <a href="#contact" class="btn">Learn More</a>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-image">
+              <img src="image/image3.png" alt="5L Container" />
+            </div>
+            <div class="product-info">
+              <h3>5L Container</h3>
+              <p>
+                Perfect for home or office use. Our 5L container ensures you
+                always have fresh water available.
+              </p>
+              <a href="#contact" class="btn">Learn More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process" id="process">
+      <div class="container">
+        <h2>Our Process</h2>
+        <div class="process-steps">
+          <div class="process-step">
+            <div class="step-icon">1</div>
+            <h3>Sourcing</h3>
+            <p>
+              Our water comes from natural springs deep within the pristine
+              mountains of Timor-Leste, untouched by pollution.
+            </p>
+          </div>
+
+          <div class="process-step">
+            <div class="step-icon">2</div>
+            <h3>Filtration</h3>
+            <p>
+              The water undergoes a natural filtration process through layers of
+              rock, enriching it with essential minerals.
+            </p>
+          </div>
+
+          <div class="process-step">
+            <div class="step-icon">3</div>
+            <h3>Testing</h3>
+            <p>
+              Rigorous testing ensures our water meets the highest standards of
+              purity, taste, and mineral content.
+            </p>
+          </div>
+
+          <div class="process-step">
+            <div class="step-icon">4</div>
+            <h3>Bottling</h3>
+            <p>
+              Our state-of-the-art bottling facility ensures that the water's
+              purity is maintained from source to bottle.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+      <div class="container">
+        <h2>What Our Customers Say</h2>
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <div class="testimonial-text">
+              <p>
+                Aqua Fresca has been our office water supplier for over two
+                years now. The quality is consistent, and their service is
+                excellent. Our employees love the refreshing taste!
+              </p>
+            </div>
+            <div class="testimonial-author">
+              <div class="author-image">
+                <img src="image/areo_dili_fresca.jpg" alt="John Doe" />
+              </div>
+              <div class="author-info">
+                <h4>John Doe</h4>
+                <p>Business Manager</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-text">
+              <p>
+                Since switching to Aqua Fresca for my family, I've noticed we
+                all drink more water. The taste is so clean and refreshing, even
+                my kids prefer it to sugary drinks!
+              </p>
+            </div>
+            <div class="testimonial-author">
+              <div class="author-image">
+                <img src="image/areo_dili_fresca.jpg" alt="Jane Smith" />
+              </div>
+              <div class="author-info">
+                <h4>Jane Smith</h4>
+                <p>Mother of Three</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-text">
+              <p>
+                As a restaurant owner, water quality is important to me. Aqua
+                Fresca provides us with consistently pure water that complements
+                our food perfectly. Our customers notice the difference!
+              </p>
+            </div>
+            <div class="testimonial-author">
+              <div class="author-image">
+                <img src="image/areo_dili_fresca.jpg" alt="Michael Chen" />
+              </div>
+              <div class="author-info">
+                <h4>Michael Chen</h4>
+                <p>Restaurant Owner</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+      <div class="container">
+        <h2>Contact Us</h2>
+        <div class="contact-content">
+          <div class="contact-info">
+            <h3>Get in Touch</h3>
+            <div class="contact-method">
+              <div class="contact-icon">📍</div>
+              <div>
+                <p>123 Spring Road, Dili, Timor-Leste</p>
+              </div>
+            </div>
+            <div class="contact-method">
+              <div class="contact-icon">📞</div>
+              <div>
+                <p>+670 7835 1999</p>
+              </div>
+            </div>
+            <div class="contact-method">
+              <div class="contact-icon">✉️</div>
+              <div>
+                <p>marketing.austim@gmail.com</p>
+              </div>
+            </div>
+            <div class="contact-method">
+              <div class="contact-icon">⏰</div>
+              <div>
+                <p>Monday - Friday: 8:00 AM - 5:00 PM</p>
+                <p>Saturday: 9:00 AM - 1:00 PM</p>
+                <p>Sunday: Closed</p>
+              </div>
+            </div>
+          </div>
+          <div class="contact-form">
+            <form action="#" method="POST">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required />
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required />
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone" />
+              </div>
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required></textarea>
+              </div>
+              <button type="submit" class="btn">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-column">
+            <h3>Aqua Fresca</h3>
+            <p>
+              Providing the purest spring water from the mountains of
+              Timor-Leste since 2018.
+            </p>
+            <div class="social-links">
+              <a href="#"><span>FB</span></a>
+              <a href="#"><span>IG</span></a>
+              <a href="#"><span>TW</span></a>
+              <a href="#"><span>YT</span></a>
+            </div>
+          </div>
+          <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#products">Products</a></li>
+              <li><a href="#process">Our Process</a></li>
+              <li><a href="#testimonials">Testimonials</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Products</h3>
+            <ul>
+              <li><a href="#products">500ml Bottle</a></li>
+              <li><a href="#products">1.5L Bottle</a></li>
+              <li><a href="#products">5L Container</a></li>
+              <li><a href="#contact">Bulk Orders</a></li>
+              <li><a href="#contact">Business Solutions</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Newsletter</h3>
+            <p>
+              Subscribe to our newsletter to receive updates and special offers.
+            </p>
+            <form action="#" method="POST">
+              <div class="form-group">
+                <input type="email" placeholder="Your Email" required />
+              </div>
+              <button type="submit" class="btn">Subscribe</button>
+            </form>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Aqua Fresca. All Rights Reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Simple Mobile Menu Toggle
+      document
+        .querySelector(".mobile-menu")
+        .addEventListener("click", function () {
+          const navLinks = document.querySelector(".nav-links");
+          navLinks.style.display =
+            navLinks.style.display === "flex" ? "none" : "flex";
+        });
+
+      // Smooth Scrolling for Anchor Links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth",
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
